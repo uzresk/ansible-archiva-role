@@ -1,0 +1,2 @@
+---
+- include: archiva.yml tags=archiva

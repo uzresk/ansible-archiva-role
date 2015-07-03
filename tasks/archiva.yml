@@ -1,0 +1,21 @@
+---
+- name: check download binary
+  stat: path={{ archiva.dl_path }}
+  register: archiva_exists
+
+- name: wget archiva
+  command: >
+    wget -O {{ archiva.dl_path }} {{ archiva.dl_url }}
+  when: archiva_exists.stat.md5 is not defined
+
+- name: install unzip
+  yum: name=unzip
+
+- name: unarchive archiva
+  unarchive: src={{ archiva.dl_path }} dest={{ archiva.install_path }} creates={{ archiva.install_path }} copy=no
+
+- name: create symbolic link
+  file: src={{ archiva.install_path }}/{{ archiva.install_name }}/bin/archiva dest=/etc/init.d/archiva state=link
+
+- name: register service and start
+  service: name=archiva state=running enabled=yes

@@ -1,0 +1,6 @@
+---
+archiva:
+  dl_url: http://ftp.jaist.ac.jp/pub/apache/archiva/2.2.0/binaries/apache-archiva-2.2.0-bin.zip
+  dl_path: /usr/local/src/apache-archiva-2.2.0-bin.zip
+  install_path: /opt/
+  install_name: apache-archiva-2.2.0
